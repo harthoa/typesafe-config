@@ -27,7 +27,7 @@ import com.typesafe.config.ConfigFactory
 object Main extends App with Loggable {
   logger.info("Hello World")
 
-  val config = ConfigFactory.load()
+  val config = ConfigFactory.load().withFallback(ConfigFactory.load("mdr"))
 //  val config = ConfigFactory.load("myconf")
 
   val testProp = config.getInt("test")
@@ -48,6 +48,8 @@ object Main extends App with Loggable {
 
   val region = config.getString("region")
   val dataSource = config.getString("data_source")
+
+  val foo = config.getObject("foo");
 
   val dataType = ConfigurationSpecific.dataType
 
